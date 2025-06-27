@@ -1,0 +1,51 @@
+Star 10 yellow 0.23E30 1E10 0 0 40E3
+
+Star 10 cyan 0.23E30 -1E10 0 0 -40E3
+
+Star 10 white 0.23E30 0 1E10 -40E3 0
+
+Star 10 red 0.23E30 0 -1E10 40E3 0
+
+#yellows
+Planet 2 green 6E24 1.2E10 0 0 -4E4
+Planet 2 green 6E24 0.8E10 0 0 12E4
+Planet 2 green 6E24 1E10 0.2E10 8E4 4E4
+Planet 2 green 6E24 1E10 -0.2E10 -8E4 4E4
+
+Planet 2 blue 8E24 1.275E10 0 0 11.9E4
+Planet 2 blue 8E24 0.725E10 0 0 -3.9E4
+Planet 2 blue 8E24 1E10 0.275E10 -7.9E4 3.9E4
+Planet 2 blue 8E24 1E10 -0.275E10 7.9E4 3.9E4
+
+#cyans
+Planet 2 green 6E24 -1.2E10 0 0 4E4
+Planet 2 green 6E24 -0.8E10 0 0 -12E4
+Planet 2 green 6E24 -1E10 0.2E10 8E4 -4E4
+Planet 2 green 6E24 -1E10 -0.2E10 -8E4 -4E4
+
+Planet 2 blue 8E24 -1.275E10 0 0 -11.9E4
+Planet 2 blue 8E24 -0.725E10 0 0 3.9E4
+Planet 2 blue 8E24 -1E10 0.275E10 -7.9E4 -3.9E4
+Planet 2 blue 8E24 -1E10 -0.275E10 7.9E4 -3.9E4
+
+#reds
+Planet 2 green 6E24 0 -1.2E10 -4E4 0
+Planet 2 green 6E24 0 -0.8E10 12E4 0
+Planet 2 green 6E24 0.2E10 -1E10 4E4 -8E4
+Planet 2 green 6E24 -0.2E10 -1E10 4E4 8E4
+
+Planet 2 blue 8E24 0 -1.275E10 11.9E4 0
+Planet 2 blue 8E24 0 -0.725E10 -3.9E4 0
+Planet 2 blue 8E24 0.275E10 -1E10 3.9E4 7.9E4
+Planet 2 blue 8E24 -0.275E10 -1E10 3.9E4 -7.9E4
+
+#whites
+Planet 2 green 6E24 0 1.2E10 4E4 0
+Planet 2 green 6E24 0 0.8E10 -12E4 0
+Planet 2 green 6E24 0.2E10 1E10 -4E4 -8E4
+Planet 2 green 6E24 -0.2E10 1E10 -4E4 8E4
+
+Planet 2 blue 8E24 0 1.275E10 -11.9E4 0
+Planet 2 blue 8E24 0 0.725E10 3.9E4 0
+Planet 2 blue 8E24 0.275E10 1E10 -3.9E4 7.9E4
+Planet 2 blue 8E24 -0.275E10 1E10 -3.9E4 -7.9E4
