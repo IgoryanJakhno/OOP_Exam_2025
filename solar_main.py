@@ -25,6 +25,12 @@ time_step = None
 space_objects = []
 """Список космических объектов."""
 
+show_trajectories = False
+"""Флаг отображения траекторий"""
+
+trajectory_lines = {}
+"""Словарь для хранения линий траекторий"""
+
 
 def execution():
     """Функция исполнения -- выполняется циклически, вызывая обработку всех небесных тел,
@@ -37,6 +43,30 @@ def execution():
     recalculate_space_objects_positions(space_objects, time_step.get())
     for body in space_objects:
         update_object_position(space, body)
+
+        # Добавляем отображение траектории
+        if show_trajectories:
+            x = scale_x(body.x)
+            y = scale_y(body.y)
+
+            if id(body) not in trajectory_lines:
+                trajectory_lines[id(body)] = []
+
+            # Создаем новую точку траектории
+            if len(trajectory_lines[id(body)]) > 0:
+                last_line = trajectory_lines[id(body)][-1]
+                coords = space.coords(last_line)
+                new_line = space.create_line(coords[2], coords[3], x, y, fill=body.color, width=1)
+                trajectory_lines[id(body)].append(new_line)
+            else:
+                new_line = space.create_line(x, y, x, y, fill=body.color, width=1)
+                trajectory_lines[id(body)].append(new_line)
+
+            # Ограничиваем длину траектории (например, последние 100 точек)
+            if len(trajectory_lines[id(body)]) > 100:
+                space.delete(trajectory_lines[id(body)][0])
+                trajectory_lines[id(body)] = trajectory_lines[id(body)][1:]
+
     physical_time += time_step.get()
     displayed_time.set("%.1f" % physical_time + " seconds gone")
 
@@ -76,6 +106,16 @@ def open_file_dialog():
     global space_objects
     global perform_execution
     perform_execution = False
+
+    # Очищаем траектории
+    for body_id in trajectory_lines:
+        for line_id in trajectory_lines[body_id]:
+            space.delete(line_id)
+    trajectory_lines.clear()
+
+    for obj in space_objects:
+        space.delete(obj.image)
+
     for obj in space_objects:
         space.delete(obj.image)  # удаление старых изображений планет
     in_filename = askopenfilename(filetypes=(("Text file", ".txt"),))
@@ -100,6 +140,19 @@ def save_file_dialog():
     out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
     write_space_objects_data_to_file(out_filename, space_objects)
 
+def toggle_trajectories():
+    """Переключает отображение траекторий объектов"""
+    global show_trajectories
+    show_trajectories = not show_trajectories
+
+    if not show_trajectories:
+        # Удаляем все линии траекторий
+        for body_id in trajectory_lines:
+            for line_id in trajectory_lines[body_id]:
+                space.delete(line_id)
+        trajectory_lines.clear()
+
+    print('Trajectories', 'shown' if show_trajectories else 'hidden')
 
 def main():
     """Главная функция главного модуля.
@@ -144,6 +197,9 @@ def main():
     displayed_time.set(str(physical_time) + " seconds gone")
     time_label = tkinter.Label(frame, textvariable=displayed_time, width=30)
     time_label.pack(side=tkinter.RIGHT)
+
+    trajectory_button = tkinter.Button(frame, text="Show Trajectories", command=toggle_trajectories)
+    trajectory_button.pack(side=tkinter.LEFT)
 
     root.mainloop()
     print('Modelling finished!')
